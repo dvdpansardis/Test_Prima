@@ -1,0 +1,89 @@
+﻿@model ContactRecord.Models.Institute
+
+@{
+    ViewBag.Title = "Institute";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID)
+    
+    <div class="form-horizontal">
+        <h4>Institute</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+    
+        <div class="form-group">
+            @Html.LabelFor(model => model.InstituteName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.InstituteName)
+                @Html.ValidationMessageFor(model => model.InstituteName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContactName)
+                @Html.ValidationMessageFor(model => model.ContactName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TelephoneNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TelephoneNumber)
+                @Html.ValidationMessageFor(model => model.TelephoneNumber)
+            </div>
+        </div>
+    </div>
+
+    if (Model.Contacts.Count > 0)
+    {
+        <hr />
+        <div class="form-horizontal">
+            <h4>Contacts</h4>
+            
+            <div class="form-group">
+                <table class="table">
+                    <tr>
+                        <td>
+                            Date/Time
+                        </td>
+                        <td>
+                            Content
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.Contacts)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateTimeContact)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    }
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Register Contact" class="btn btn-default" />
+        </div>
+    </div>
+    
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

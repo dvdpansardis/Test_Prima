@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ContactRecord.Models.Institute>
+
+@{
+    ViewBag.Title = "Institute";
+}
+
+<h2>Institucts</h2>
+
+<p>
+    @Html.ActionLink("Register New", "Create") |
+    @Html.ActionLink("Report", "Report", "Institute")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstituteName)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstituteName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model ContactRecord.Models.Contact
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Institute.ID)
+    
+    <div class="form-horizontal">
+        <h2>Contact</h2>
+        <div class="form-horizontal">
+            <h4>Products of Interesting</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    
+                    @{
+                        if (ViewBag.Products != null) 
+                        {
+                            List<ContactRecord.ViewModels.AssignedProductData> products = ViewBag.Products;
+
+                            foreach (var product in products)
+                            {
+                                @:<div class="col-md-10">
+                                    <input type="checkbox" name="selectedProducts" value="@product.ID" @(Html.Raw(product.Assigned ? "checked=\"checked\"" : "")) />
+                                @product.Name
+                                @:</div>
+                            }
+                    
+                        }
+                    }
+                    
+                </div>
+            </div>
+        </div> 
+        <div class="form-horizontal">
+            <h4>Content</h4>
+            <hr />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.TextAreaFor(model => model.Content, new { cols = "500", rows = "5" })
+                    @Html.ValidationMessageFor(model => model.Content)
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Register" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

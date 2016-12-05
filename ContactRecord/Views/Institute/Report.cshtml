@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ContactRecord.Models.Institute>
+
+
+@foreach (var item in Model) {
+    <div class="row">
+        <div class="col-md-4">
+            <h2>@Html.DisplayFor(modelItem => item.InstituteName)</h2>
+        
+            <p>Contact: @Html.DisplayFor(modelItem => item.ContactName)</p>
+            <p>Telephone number: @Html.DisplayFor(modelItem => item.TelephoneNumber)</p>
+        
+            <table class="table">
+                <tr>
+                    <td>
+                        Date/Time
+                    </td>
+                    <td>
+                        Content
+                    </td>
+                </tr>
+                @foreach (var subItem in item.Contacts)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.DateTimeContact)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => subItem.Content)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Institute")
+</div>
+
